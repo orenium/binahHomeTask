@@ -23,6 +23,7 @@ public class ScrapperTest extends BaseTest {
         // Step 3: 'Scrap' the search results into csv file
         searchResultsPage.scrapSearchResults();
 
+        // Verify CSV file was created
         Assert.assertTrue(new File("items.csv").exists());
     }
 }

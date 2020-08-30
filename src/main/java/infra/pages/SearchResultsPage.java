@@ -8,11 +8,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import static utils.TestRunner.printToLog;
+import static utils.TestRunner.writeToCsvFile;
 
 public class SearchResultsPage extends pages.BasePage {
 
@@ -25,18 +25,13 @@ public class SearchResultsPage extends pages.BasePage {
     public WebElement nextResultsPageBtn;
 
 
-    /**
-     * For the items in the first 4 pages collect the following values:
-     * Title
-     * Dates
-     * Prize
-     * Number of stars
-     */
-
-
     public SearchResultsPage(WebDriver driver) {
         super(driver);
     }
+
+    /**
+     * this method scrap the search results data into a csv file
+     */
 
     public void scrapSearchResults() {
         String title;
@@ -64,6 +59,7 @@ public class SearchResultsPage extends pages.BasePage {
                     prize = prizes.get(0).getText().replaceAll(System.lineSeparator(), ".");
 
                     // Item's ranking  (number of stars)
+                    //TODO: not done yet
 //                moveToElement(item.findElement(By.cssSelector("div.a-row.a-size-small")));
 //                ranking = item.findElement(By.cssSelector("span.a-icon-alt")).getText();
 
@@ -85,28 +81,5 @@ public class SearchResultsPage extends pages.BasePage {
         }
     }
 
-
-    private void writeToCsvFile(List<SearchResultItem> items) {
-        FileWriter csvWriter = null;
-
-        try {
-            csvWriter = new FileWriter("items.csv");
-            csvWriter.append("Name");
-            csvWriter.append(",");
-            csvWriter.append("Role");
-            csvWriter.append(",");
-            csvWriter.append("Topic");
-            csvWriter.append("\n");
-
-            for (SearchResultItem singleItem : items) {
-                csvWriter.append(String.join(",", singleItem.toString()));
-                csvWriter.append("\n");
-            }
-            csvWriter.flush();
-            csvWriter.close();
-        } catch (Exception ex) {
-            printToLog("scrapSearchResults.writeToCsvFile: " + ex.getMessage());
-        }
-    }
 
 }

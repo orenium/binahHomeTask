@@ -20,9 +20,6 @@ public abstract class BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public boolean isElementShown(WebElement element){
-        return element.isDisplayed();
-    }
 
     public void moveToElement(WebElement element){
         if (driver != null) {

@@ -13,7 +13,6 @@ public abstract class BaseTest {
 
     protected WebDriver driver;
 
-    //    @BeforeClass
     @BeforeSuite
     public void setup() {
         driver = getNewWebDriver();
@@ -52,7 +51,7 @@ public abstract class BaseTest {
     @AfterSuite
     public void afterAllTests() {
         if (driver != null) {
-//            driver.quit();
+            driver.quit();
         }
     }
 
